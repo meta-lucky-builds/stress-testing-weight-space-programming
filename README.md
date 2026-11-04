@@ -6,19 +6,19 @@ I wanted to know what that means for mechanistic interpretability, so I rebuilt 
 
 ## Top findings
 
-1. **The edit replicates.** On my own run it scored 54.0% on MATH-500 and 68.0% on GSM8K, against the paper's 48.1% and 67.1%. Answers cut off at the token limit fell from 91.4% to 16.4%.
+1. **The published edit's scores replicate.** On my own run it scored 54.0% on MATH-500 and 68.0% on GSM8K, against the paper's 48.1% and 67.1%. Answers cut off at the token limit fell from 91.4% to 16.4%.
 
 2. **Turning thinking off gets most of the same gain, with no edit.** The post reports Qwen with thinking on only. With thinking off, the unedited model reached 48.8% combined, against 61.0% for the edit and 9.2% for the unedited model with thinking on. That is about 76% of the edit's gain, at about one-seventh of the tokens. The edit still wins by 12.2 points (roughly +6 to +18), so it is a real improvement, but much smaller than 7.9% → 48.1% suggests.
 
-3. **A simple method finds a similar direction, but the location decides whether it works.** A difference-of-means direction, found with no agent, has |cosine| 0.62 and 0.58 with Astra's edit in layers 15 and 19, where chance is about 0.03. Yet removing it from the layers my method chose (7 and 8) did nothing: 9.2%, the same as unedited. Removing it from all 24 layers made things worse on practice problems (0% correct, 100% cut off). I did not test this direction at layers 15 and 19, and that is the obvious next experiment.
+3. **A simple method finds a similar direction, but removing it from other layers did nothing.** A difference-of-means direction, found with no agent, has |cosine| 0.62 and 0.58 with Astra's edit in layers 15 and 19, where chance is about 0.03. Yet removing it from the layers my method chose (7 and 8) did nothing: 9.2%, the same as unedited. Removing it from all 24 layers made things worse on practice problems (0% correct, 100% cut off). I did not test this direction at layers 15 and 19, and that is the obvious next experiment.
 
 4. **Weights can reveal sycophancy, but only if you know what to look for.** Comparing a weight change with a known template separated sycophantic models well once 25% of labels were sycophantic (AUC 0.89). Just measuring how far the weights moved stayed near chance until 100% (0.45–0.55, then 0.75). At 10% of labels, behaviour had already shifted from 0.74 to 0.91 while the template's AUC was only 0.64, which was not significant.
 
 5. **Perfect accuracy can hide a changing circuit.** A hand-built network stayed 100% accurate with no noise at all, while swapping a single known unit stopped giving the predicted answer up to 25% of the time. After a task change, the now-unneeded AND unit lost its correlation with AND (1.00 → 0.00) within 500 steps, while cosine similarity to the starting weights was still 0.996.
 
-6. **Backdoor detection looks strong only when the defender knows the attack.** With 481 edited weights, a classifier trained on the same kind of attack reached AUC 0.99, while plain weight statistics reached 0.68. That 0.99 is probably optimistic for real use.
+6. **At 481 edited weights, backdoor detection looks strong only when the defender knows the attack.** With 481 edited weights, a classifier trained on the same kind of attack reached AUC 0.99, while plain weight statistics reached 0.68. That 0.99 is probably optimistic for real use.
 
-**The pattern across these:** measuring how much weights changed told me little. Knowing the right direction, and the right place, told me a lot. If that holds up, the hard part of weight-space work is knowing where and what to look for, not the size of the change.
+**The pattern across these:** measuring how much weights changed told me little unless the change was large. Knowing the right direction, and the right place, told me a lot. If that holds up, the hard part of weight-space work is knowing where and what to look for, not the size of the change.
 
 ## Results
 
@@ -82,7 +82,7 @@ Digit-classifier MLPs, 40 clean and 40 backdoored networks per budget, with an o
 - **Idea 1:** layers were chosen on only 64 practice problems, and the separation score barely varied across the top layers (2.65–2.81). The overlap uses the top singular vector of Astra's edit, and I did not measure how much of the edit that vector captures. I also measured only math, not the post's other benchmarks.
 - **Idea 4:** this is a different, smaller model than the post's Gemma, and the control already prefers the suggestion 74% of the time. All strengths share the same null pairs, and p-values are not corrected for multiple comparisons. The below-chance activation scores are unexplained.
 - **Idea 5:** swap scores settle on nearly identical values across seeds (0.87 appears in several conditions), which looks like a structural effect rather than gradual drift. Single-unit swaps may also understate a job that spread across units, and Adam may cause some of the movement. Swap scores are not meaningful after a task change, so the table omits them. I have not resolved any of this.
-- **Idea 6:** the tiny-budget attacks failed by damaging accuracy, so this does not show small backdoors are impossible. Trigger inversion scoring below chance suggests my implementation or settings need work.
+- **Idea 6:** the tiny-budget attacks failed on attack success, normal accuracy or both, so this does not show small backdoors are impossible. Trigger inversion scoring below chance suggests my implementation or settings need work.
 - These are exploratory runs and have not been peer reviewed.
 
 ## Reproduce

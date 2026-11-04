@@ -1,5 +1,7 @@
 # Results
 
+> **Note added after the run:** the report below is unchanged. No LLM was called, despite the `LLM:` line in the header. Ideas 3 and 2 were skipped because the model setting was missing, not the API key. Idea 1's verdict applies only to layers 7 and 8. Idea 5's "Read" line wrongly blames label noise, because the no-noise control changed just as much. See the README for the corrected interpretation.
+
 Total time 87.3 min on 4 GPU(s). LLM: openai, claude-opus-5-5.
 
 ## Idea 5
