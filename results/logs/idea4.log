@@ -1,0 +1,15 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+[14:46:55] idea4: 56 fine-tunes in 297s; sycophancy at strength 1: 1.00, control: 0.74
+
+## Idea 4
+
+Model HuggingFaceTB/SmolLM2-135M-Instruct. 8 seeds, 300 fine-tuning steps per run. The score of a pair is its similarity to a template from other seeds at full strength; AUC compares sycophant pairs with control pairs (0.5 is chance). With 8 seeds, the smallest possible one-sided p is about 1/12870.
+
+| Sycophantic labels | Sycophancy rate | Control rate | Weights AUC | Activations AUC | Distance only AUC |
+|---|---|---|---|---|---|
+| 5% | 0.81 | 0.74 | 0.62 (p=0.231) | 0.42 (p=0.724) | 0.53 |
+| 10% | 0.91 | 0.74 | 0.64 (p=0.190) | 0.17 (p=0.993) | 0.48 |
+| 25% | 0.94 | 0.74 | 0.89 (p=0.003) | 0.20 (p=0.982) | 0.45 |
+| 50% | 0.99 | 0.74 | 0.98 (p=0.000) | 0.31 (p=0.902) | 0.55 |
+| 100% | 1.00 | 0.74 | 1.00 (p=0.000) | 1.00 (p=0.000) | 0.75 |

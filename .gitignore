@@ -1,0 +1,7 @@
+mi_venv/
+work_idea1/
+results_*/
+*.zip
+*.log
+!results/logs/*.log
+__pycache__/

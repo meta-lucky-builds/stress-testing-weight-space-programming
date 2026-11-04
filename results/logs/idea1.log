@@ -1,0 +1,73 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+
+
+
+
+[14:47:26] generating 8 shards on 4 GPU(s)
+[14:57:43] GPU 3: traces_s3of8 done in 617s
+[14:58:08] GPU 2: traces_s2of8 done in 642s
+[14:58:09] GPU 1: traces_s1of8 done in 643s
+[14:58:11] GPU 0: traces_s0of8 done in 646s
+[15:04:44] GPU 3: traces_s4of8 done in 422s
+[15:04:57] GPU 2: traces_s5of8 done in 409s
+[15:05:19] GPU 1: traces_s6of8 done in 429s
+[15:05:30] GPU 0: traces_s7of8 done in 439s
+[15:05:30] generation finished in 1085s
+[15:05:31] traces: 462 cut at the limit, 50 finished
+
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[15:06:36] activations: 128 looped, 50 finished
+[15:06:36] layers by separation: [(7, 2.81), (8, 2.79), (9, 2.77), (4, 2.75), (5, 2.74), (3, 2.72), (11, 2.65), (12, 2.65)]
+[15:06:37] generating 9 shards on 4 GPU(s)
+[15:11:02] GPU 3: dev_top6_s0of3 done in 265s
+[15:11:03] GPU 0: dev_top2_s0of3 done in 266s
+[15:11:06] GPU 1: dev_top2_s1of3 done in 269s
+[15:11:08] GPU 2: dev_top2_s2of3 done in 270s
+[15:15:05] GPU 0: dev_top6_s2of3 done in 241s
+[15:15:05] GPU 3: dev_top6_s1of3 done in 242s
+[15:15:36] GPU 2: dev_all_s1of3 done in 268s
+[15:15:37] GPU 1: dev_all_s0of3 done in 271s
+[15:19:06] GPU 0: dev_all_s2of3 done in 241s
+[15:19:06] generation finished in 749s
+[15:19:06] dev top2 (layers [7, 8]): acc 0.078, cut 0.922
+[15:19:06] dev top6 (layers [7, 8, 9, 4, 5, 3]): acc 0.078, cut 0.938
+[15:19:06] dev all (layers [0, 1, 2, 3, 4, 5]): acc 0.000, cut 1.000
+[15:19:06] selected: top2
+[15:19:08] generating 10 shards on 4 GPU(s)
+[15:30:02] GPU 3: test_astra_50_pass_s1of2 done in 654s
+[15:30:50] GPU 2: test_astra_50_pass_s0of2 done in 703s
+[15:43:38] GPU 1: test_unedited_s1of2 done in 1471s
+[15:44:18] GPU 0: test_unedited_s0of2 done in 1511s
+[15:55:04] GPU 3: test_baseline_dom_s0of2 done in 1502s
+[15:55:43] GPU 2: test_baseline_dom_s1of2 done in 1492s
+[15:57:41] GPU 3: test_thinking_off_s0of2 done in 157s
+[15:57:45] GPU 2: test_thinking_off_s1of2 done in 122s
+[16:08:51] GPU 0: test_random_direction_s1of2 done in 1472s
+[16:08:56] GPU 1: test_random_direction_s0of2 done in 1518s
+[16:08:56] generation finished in 2988s
+[16:08:57] unedited {"acc": 0.092, "cut": 0.914, "tokens": 30437.91, "n": 500}
+[16:08:58] astra_50_pass {"acc": 0.61, "cut": 0.164, "tokens": 16531.23, "n": 500}
+[16:08:58] baseline_dom {"acc": 0.092, "cut": 0.918, "tokens": 30457.61, "n": 500}
+[16:08:59] random_direction {"acc": 0.098, "cut": 0.908, "tokens": 30264.442, "n": 500}
+[16:09:00] thinking_off {"acc": 0.488, "cut": 0.186, "tokens": 2448.018, "n": 500}
+
+## Idea 1
+
+Problems: 250 MATH-500 and 250 GSM8K, one sample each, paper's sampling. Baseline chosen on 64 practice problems: top2, layers [7, 8].
+
+| Arm | MATH-500 | GSM8K | Combined | Cut at limit | Mean tokens |
+|---|---|---|---|---|---|
+| unedited | 8.4% (paper 7.9) | 10.0% (paper 13.8) | 9.2% | 91.4% | 30438 |
+| astra_50_pass | 54.0% (paper 48.1) | 68.0% (paper 67.1) | 61.0% | 16.4% | 16531 |
+| baseline_dom | 5.2% | 13.2% | 9.2% | 91.8% | 30458 |
+| random_direction | 7.2% | 12.4% | 9.8% | 90.8% | 30264 |
+| thinking_off | 45.2% | 52.4% | 48.8% | 18.6% | 2448 |
+
+Baseline minus Astra: -51.8%, 95% CI [-56.2%, -47.4%]. Random direction minus unedited: +0.6%.
+Overlap of the baseline direction with Astra's edit (|cosine|): {"15": {"same_layer": 0.617, "best_other_layer": 0.617, "random_expected": 0.031}, "19": {"same_layer": 0.576, "best_other_layer": 0.576, "random_expected": 0.031}}
+
+**Verdict:** The simple baseline FAILS: this direction alone does not give the effect.
+
+The thinking_off arm answers a different question: how much of the deficit comes from using thinking mode at all.

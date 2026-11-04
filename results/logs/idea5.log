@@ -1,0 +1,16 @@
+[14:42:08] idea5: 300 runs in 22s
+
+## Idea 5
+
+50 seeds, 3000 training steps. Interchange accuracy (IIA) = how often swapping that one unit between inputs gives the answer the circuit predicts. 1.0 means the unit still does its job.
+
+| Condition | Original-task acc | Target acc | XOR IIA, original unit | XOR IIA, best unit | AND IIA, original unit | AND IIA, best unit |
+|---|---|---|---|---|---|---|
+| same_task | 1.000 | 1.000 | 0.867 | 0.867 | 0.755 | 0.755 |
+| label_noise | 1.000 | 1.000 | 0.870 | 0.870 | 0.850 | 0.850 |
+| weight_noise | 1.000 | 1.000 | 0.782 | 0.782 | 0.769 | 0.769 |
+| related_shift | 0.625 | 1.000 | 0.757 | 0.757 | 0.834 | 0.834 |
+| unrelated_shift | 0.732 | 0.554 | 0.740 | 0.740 | 0.675 | 0.675 |
+| random_init_control | 1.000 | 1.000 | 0.000 | 0.008 | 0.006 | 0.011 |
+
+**Read:** label noise kept the behaviour but the original units lost their role: behaviour alone would hide this drift.

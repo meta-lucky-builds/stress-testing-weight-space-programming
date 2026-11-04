@@ -1,0 +1,65 @@
+{
+ "rows": [
+  {
+   "budget": 0.001,
+   "edited_weights": 4,
+   "clean_acc": 0.8274999961256981,
+   "attack_success": 0.45147975236177446,
+   "attacks_working": 0,
+   "n": 40
+  },
+  {
+   "budget": 0.01,
+   "edited_weights": 48,
+   "clean_acc": 0.7719444453716278,
+   "attack_success": 0.8131619930267334,
+   "attacks_working": 0,
+   "n": 40
+  },
+  {
+   "budget": 0.1,
+   "edited_weights": 481,
+   "clean_acc": 0.9815972208976745,
+   "attack_success": 0.9964953377842903,
+   "attacks_working": 40,
+   "n": 40,
+   "auc": {
+    "weight_stats_outlier": {
+     "auc": 0.68,
+     "p": 0.0029985007496251873
+    },
+    "trigger_inversion": {
+     "auc": 0.6925,
+     "p": 0.0009995002498750624
+    },
+    "meta_classifier": {
+     "auc": 0.99,
+     "p": 0.0004997501249375312
+    }
+   }
+  },
+  {
+   "budget": 1.0,
+   "edited_weights": 4810,
+   "clean_acc": 0.9864583238959312,
+   "attack_success": 1.0,
+   "attacks_working": 40,
+   "n": 40,
+   "auc": {
+    "weight_stats_outlier": {
+     "auc": 1.0,
+     "p": 0.0004997501249375312
+    },
+    "trigger_inversion": {
+     "auc": 0.36125,
+     "p": 0.9845077461269365
+    },
+    "meta_classifier": {
+     "auc": 1.0,
+     "p": 0.0004997501249375312
+    }
+   }
+  }
+ ],
+ "llm": null
+}

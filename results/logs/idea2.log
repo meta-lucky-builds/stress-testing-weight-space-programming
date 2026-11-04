@@ -1,0 +1,5 @@
+[14:41:47] WARNING: LLM not available, skipping the LLM parts: RuntimeError: set MI_LLM_MODEL to the provider's model name
+
+## Idea 2
+
+Skipped: needs an LLM API key.

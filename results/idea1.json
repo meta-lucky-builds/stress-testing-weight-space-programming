@@ -1,0 +1,142 @@
+{
+ "results": {
+  "unedited": {
+   "all": {
+    "acc": 0.092,
+    "cut": 0.914,
+    "tokens": 30437.91,
+    "n": 500
+   },
+   "math500": {
+    "acc": 0.084,
+    "cut": 0.92,
+    "tokens": 30607.632,
+    "n": 250
+   },
+   "gsm8k": {
+    "acc": 0.1,
+    "cut": 0.908,
+    "tokens": 30268.188,
+    "n": 250
+   }
+  },
+  "astra_50_pass": {
+   "all": {
+    "acc": 0.61,
+    "cut": 0.164,
+    "tokens": 16531.23,
+    "n": 500
+   },
+   "math500": {
+    "acc": 0.54,
+    "cut": 0.276,
+    "tokens": 21500.62,
+    "n": 250
+   },
+   "gsm8k": {
+    "acc": 0.68,
+    "cut": 0.052,
+    "tokens": 11561.84,
+    "n": 250
+   }
+  },
+  "baseline_dom": {
+   "all": {
+    "acc": 0.092,
+    "cut": 0.918,
+    "tokens": 30457.61,
+    "n": 500
+   },
+   "math500": {
+    "acc": 0.052,
+    "cut": 0.948,
+    "tokens": 31255.332,
+    "n": 250
+   },
+   "gsm8k": {
+    "acc": 0.132,
+    "cut": 0.888,
+    "tokens": 29659.888,
+    "n": 250
+   }
+  },
+  "random_direction": {
+   "all": {
+    "acc": 0.098,
+    "cut": 0.908,
+    "tokens": 30264.442,
+    "n": 500
+   },
+   "math500": {
+    "acc": 0.072,
+    "cut": 0.932,
+    "tokens": 30875.176,
+    "n": 250
+   },
+   "gsm8k": {
+    "acc": 0.124,
+    "cut": 0.884,
+    "tokens": 29653.708,
+    "n": 250
+   }
+  },
+  "thinking_off": {
+   "all": {
+    "acc": 0.488,
+    "cut": 0.186,
+    "tokens": 2448.018,
+    "n": 500
+   },
+   "math500": {
+    "acc": 0.452,
+    "cut": 0.308,
+    "tokens": 3641.312,
+    "n": 250
+   },
+   "gsm8k": {
+    "acc": 0.524,
+    "cut": 0.064,
+    "tokens": 1254.724,
+    "n": 250
+   }
+  }
+ },
+ "dev": {
+  "top2": {
+   "acc": 0.078125,
+   "cut": 0.921875,
+   "tokens": 30862.90625,
+   "n": 64
+  },
+  "top6": {
+   "acc": 0.078125,
+   "cut": 0.9375,
+   "tokens": 30927.890625,
+   "n": 64
+  },
+  "all": {
+   "acc": 0.0,
+   "cut": 1.0,
+   "tokens": 32768.0,
+   "n": 64
+  }
+ },
+ "selected": "top2",
+ "layers": [
+  7,
+  8
+ ],
+ "overlap": {
+  "15": {
+   "same_layer": 0.617097020149231,
+   "best_other_layer": 0.617097020149231,
+   "random_expected": 0.03125
+  },
+  "19": {
+   "same_layer": 0.5758097767829895,
+   "best_other_layer": 0.5758097767829895,
+   "random_expected": 0.03125
+  }
+ },
+ "verdict": "The simple baseline FAILS: this direction alone does not give the effect."
+}
