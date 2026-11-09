@@ -124,6 +124,14 @@ I corrected some report wording in the script after this run, including idea 5's
 3. Run the LLM experiments, including Astra if I can get access.
 4. Retest idea 5 with SGD and multi-unit swaps.
 
+## Related and concurrent work
+
+- **Earlier, independent:** Carlos Toledo's pre-registered [audit](https://carlostoledo.co/reports/weight-space-programming.html) ran the unedited model on 3 November 2026, a day before my run, and reached the same conclusion: under the model card's settings the unedited model scores 44.0% on MATH-500, against 7.2% under the post's settings, which it reads as mostly a settings effect.
+- **Concurrent:** [openwsp](https://github.com/openwsp/openwsp) reports a no-thinking control at 46.8% on MATH-500 and a mechanical repair at 46.0%.
+- **Later:** [Exploring Weight-Space Programming](https://arxiv.org/abs/2611.09382) (Hu et al., 6 Nov 2026) studies editing trajectories on the same model, and [Computation, not weight access](https://arxiv.org/abs/2611.07847) (Liu and Yang, 5 Nov 2026) tests GPT-6 Astra as an auditor of clinical prediction networks.
+
+I found no earlier report of the layer 15 and 19 overlap, the sycophancy dose curve, the backdoor budget sweep or the circuit-drift test.
+
 ## Credits
 
 The original work, edit and evaluation settings are by Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab. The edit is downloaded at run time from [their logs](https://github.com/RikiyaT/lm_understand-logs), not stored here.
