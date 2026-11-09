@@ -93,7 +93,7 @@ You need a Linux machine with a GPU and about 40 GB of free disk. The script ins
 python mi_sprint.py 2>&1 | tee run.log
 ```
 
-Results appear in `results/SUMMARY.md`. To include the LLM experiments, set a key first:
+Results appear in [`results/SUMMARY.md`](results/SUMMARY.md). To include the LLM experiments, set a key first:
 
 ```bash
 # Claude
@@ -115,7 +115,7 @@ results/         the raw output of the run reported above
   logs/          per-idea logs, with progress bars removed
 ```
 
-I corrected some report wording in the script after this run, including idea 5's automatic "Read" line, which wrongly blamed label noise. `results/` keeps the original text, and this README has the corrected interpretation.
+I corrected some report wording in the script after this run, including idea 5's automatic "Read" line, which wrongly blamed label noise. [`results/`](results/) keeps the original text, and this README has the corrected interpretation.
 
 ## What I would do next
 
